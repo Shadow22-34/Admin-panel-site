@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crystal Hub - Scripts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/waves.css') }}">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="waves">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <div class="sidebar">
+        <div class="logo-container">
+            <div class="logo-text">
+                <span class="crystal">CRYSTAL</span><br>
+                <span class="scripts">SCRIPTS</span>
+            </div>
+        </div>
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('scripts') }}" class="active">Scripts</a>
+            <a href="{{ url_for('stats') }}">Statistics</a>
+        </nav>
+        <div class="logout-container">
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="script-section">
+            <h2>Add New Script</h2>
+            <form method="POST" class="script-form">
+                <input type="text" name="script_name" placeholder="Script Name" required>
+                <input type="text" name="game_id" placeholder="Roblox Game ID" required>
+                <input type="text" name="version" placeholder="Version" required>
+                <textarea name="content" placeholder="Script Content" required></textarea>
+                <button type="submit" class="save-btn">Save Script</button>
+            </form>
+        </div>
+
+        <div class="script-list">
+            <h2>All Scripts</h2>
+            <div class="scripts-grid">
+                {% for script in scripts %}
+                <div class="script-card">
+                    <h3>{{ script.name }}</h3>
+                    <p>Version: {{ script.version }}</p>
+                    <p>Added: {{ script.created_at.strftime('%Y-%m-%d') }}</p>
+                    <a href="{{ url_for('view_script', script_id=script.id) }}" class="view-btn">View Script</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

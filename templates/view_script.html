@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crystal Hub - View Script</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-container">
+            <div class="logo-text">
+                <span class="crystal">CRYSTAL</span>
+                <span class="scripts">SCRIPTS</span>
+            </div>
+        </div>
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('scripts') }}" class="active">Scripts</a>
+            <a href="{{ url_for('statistics') }}">Statistics</a>
+        </nav>
+        <div class="logout-container">
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="script-viewer">
+            <div class="script-header">
+                <h1>{{ script.name }}</h1>
+                <div class="script-meta">
+                    <span>Version: {{ script.version }}</span>
+                    <span>Game ID: {{ script.game_id }}</span>
+                    <span>Added: {{ script.created_at.strftime('%Y-%m-%d') }}</span>
+                </div>
+            </div>
+            <div class="script-content">
+                <pre><code>{{ script.content }}</code></pre>
+            </div>
+            <div class="action-buttons">
+                <a href="{{ url_for('scripts') }}" class="back-btn">Back to Scripts</a>
+                <form method="POST" action="{{ url_for('delete_script', script_id=script.id) }}" style="display: inline;">
+                    <button type="submit" class="delete-btn">Delete Script</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

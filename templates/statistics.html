@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crystal Scripts - Statistics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/waves.css') }}">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="waves">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <div class="sidebar">
+        <div class="logo-container">
+            <div class="logo-text">
+                <span class="crystal">CRYSTAL</span><br>
+                <span class="scripts">SCRIPTS</span>
+            </div>
+        </div>
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('scripts') }}">Scripts</a>
+            <a href="{{ url_for('statistics') }}" class="active">Statistics</a>
+        </nav>
+        <div class="logout-container">
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="stats-container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <h3>Total Buyers</h3>
+                    <p id="total-buyers" class="stat-value">-</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <h3>Active Users</h3>
+                    <p id="active-users" class="stat-value">-</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔄</div>
+                    <h3>Total Executions</h3>
+                    <p id="total-executions" class="stat-value">-</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateStats() {
+            fetch('/stats')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('total-buyers').textContent = data.total_buyers;
+                    document.getElementById('active-users').textContent = data.active_users;
+                    document.getElementById('total-executions').textContent = data.total_executions;
+                });
+        }
+
+        // Update stats immediately and every 5 seconds
+        updateStats();
+        setInterval(updateStats, 5000);
+    </script>
+</body>
+</html>

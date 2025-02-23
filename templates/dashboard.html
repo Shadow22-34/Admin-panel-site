@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crystal Hub - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-container">
+            <div class="logo-text">
+                <span class="crystal">CRYSTAL</span>
+                <span class="scripts">SCRIPTS</span>
+            </div>
+        </div>
+        <nav>
+            <a href="{{ url_for('dashboard') }}" class="active">Dashboard</a>
+            <a href="{{ url_for('scripts') }}">Scripts</a>
+            <a href="{{ url_for('statistics') }}">Statistics</a>
+        </nav>
+        <div class="logout-container">
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="stats-overview">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-value">{{ stats.total_buyers }}</div>
+                <div class="stat-label">Total Buyers</div>
+                <div class="stat-trend trend-up">+5%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎮</div>
+                <div class="stat-value">{{ stats.active_users }}</div>
+                <div class="stat-label">Active Users</div>
+                <div class="stat-trend trend-up">+11%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-value">{{ stats.total_executions }}</div>
+                <div class="stat-label">Total Executions</div>
+                <div class="stat-trend trend-up">+8%</div>
+            </div>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-card">
+                <h3>Execution Trends</h3>
+                <canvas id="executionChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>User Growth</h3>
+                <canvas id="userChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add Chart.js initialization here
+        const executionCtx = document.getElementById('executionChart').getContext('2d');
+        const userCtx = document.getElementById('userChart').getContext('2d');
+        
+        // Add chart configurations
+        // ... (I can provide the chart configurations if you want)
+    </script>
+</body>
+</html>
